@@ -5,14 +5,16 @@ import TodoList from "./components/Todo.jsx";
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<LoginSignUp />} />
-          <Route path="/todo" element={<TodoList />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<LoginSignUp />} />
+            <Route path="/todo" element={<TodoList />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </>
   );
 }
 
