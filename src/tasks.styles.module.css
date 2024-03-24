@@ -1,10 +1,10 @@
 :root {
-    --bg-color: #f9f9f9;
-    --border-color: #000;
-    --list-bg-color: #ffffff;
-    --font-color: #000;
-    --login-bg-color: #007bff;
-    --signup-bg-color: #28a745;
+    --bg-color: #000;
+    --border-color: #eee;
+    --list-bg-color: #000;
+    --f-color: #fff;
+    --login-bg-color: #333;
+    --signup-bg-color: #000;
 }
 
 *,
@@ -19,9 +19,11 @@ body {
     background-color: var(--bg-color);
     font-family: Arial, sans-serif;
     font-size: 1.2rem;
+    color: var(--f-color);
 }
 
 .tasks {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,12 +31,18 @@ body {
     height: 100vh;
 }
 
+.tasks>.back-btn {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+}
+
 .title {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--f-color);
     border: 4px double var(--border-color);
-    padding: 10px;
+    padding: 20px;
 }
 
 .taskList {
@@ -54,29 +62,48 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 10px;
     padding-left: 10px;
+    gap: 5px;
 }
 
 .updatetask {
     padding-left: 10px;
 }
 
-label {
+.label {
     font-size: 16px;
     line-height: 1.5;
-    color: #333;
+    color: var(--f-color);
 }
 
-label:hover {
-    background-color: #e0e0e0;
+.label:hover {
+    background-color: #444;
+    cursor: pointer;
+}
+
+.actionIcons {
+    display: flex;
+    gap: 5px;
+}
+
+.actionIcon {
+    cursor: pointer;
+}
+
+.signout {
+    color: var(--f-color);
+    margin-top: 10px;
+    font-size: 1.2rem;
+    padding: 15px 10px;
     cursor: pointer;
 }
 
 
 .completed {
     text-decoration: line-through;
-    color: #888;
+    color: var(--f-color);
 }
 
 
@@ -86,31 +113,43 @@ label:hover {
     margin-top: 10px;
 }
 
+.inputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 .inputField {
-    width: 90%;
+    font-size: 1.2rem;
+    color: var(--f-color);
+    width: calc(100% - 50px);
     padding: 10px;
-    margin: 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 5px;
+    margin-right: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    outline: none;
 }
 
-button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
+.button {
+    background-color: var(--bg-color);
+    color: var(--f-color);
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
     cursor: pointer;
 }
 
-.signout {
-    color: #007bff;
+button,
+button[type="submit"] {
+    background-color: var(--login-bg-color);
+    color: var(--f-color);
+    border: none;
+    padding: 10px 10px;
     cursor: pointer;
-    align-self: flex-end;
-    padding: 5px 10px;
-    margin: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: auto;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .tasks {
+        margin-top: 40px;
+    }
 }
