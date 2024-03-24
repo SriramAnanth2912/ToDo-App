@@ -1,10 +1,11 @@
 :root {
-    --bg-color: #f9f9f9;
-    --border-color: #000;
-    --form-bg-color: #ffffff;
-    --font-color: #000;
-    --login-bg-color: #007bff;
-    --signup-bg-color: #28a745;
+    --bg-color: #000;
+    --border-color: #eee;
+    --list-bg-color: #000;
+    --f-color: #fff;
+    --login-bg-color: #111;
+    --signup-bg-color: #111;
+    --form-bg-color: #111;
 }
 
 *,
@@ -19,6 +20,7 @@ body {
     background-color: var(--bg-color);
     font-size: 1.2rem;
     font-family: Arial, sans-serif;
+    color: var(--f-color);
 }
 
 .home {
@@ -32,9 +34,9 @@ body {
 .title {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--f-color);
     border: 4px double var(--border-color);
-    padding: 10px;
+    padding: 20px;
 }
 
 .form-page {
@@ -43,7 +45,7 @@ body {
     width: 300px;
     padding: 20px;
     background-color: var(--form-bg-color);
-    border-radius: 10px;
+    border: 6px double var(--border-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -52,7 +54,7 @@ body {
     align-items: baseline;
     gap: 10px;
     margin-bottom: 10px;
-    color: var(--font-color);
+    color: var(--f-color);
 }
 
 .form-page label:hover {
@@ -64,16 +66,18 @@ input[type="email"],
 input[type="password"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border-bottom: 1px solid #ccc;
     margin-bottom: 15px;
+    padding: 10px;
+    margin-right: 10px;
+    background-color: transparent;
+    outline: none;
 }
 
 .form-login,
 .form-signup {
-    color: var(--bg-color);
+    color: var(--f-color);
     border: none;
-    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -94,10 +98,6 @@ input[type="password"] {
 
 @media screen and (max-width: 600px) {
     .home {
-        margin-top: 40px;
-    }
-
-    .tasks {
         margin-top: 40px;
     }
 }
