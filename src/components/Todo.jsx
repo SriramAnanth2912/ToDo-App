@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import Complete from "./CompleteList";
 import { Authorise } from "../Authenticate";
 import { useNavigate } from "react-router-dom";
 import styles from "../tasks.styles.module.css";
@@ -15,6 +16,7 @@ export default function TodoList() {
     id: 0,
   });
   const [display, setDisplay] = useState("block");
+  const [displayComplete, setDisplayComplete] = useState(false);
   const [selectedTodoIndex, setSelectedTodoIndex] = useState(null);
 
   const fetchTodoList = async (token) => {
@@ -161,102 +163,95 @@ export default function TodoList() {
   return (
     <>
       <div className={styles.tasks}>
+        <button
+          className={styles["back-btn"]}
+          onClick={() => {
+            NavigateTo("/");
+          }}
+        >
+          Back
+        </button>
         <h2 className={styles.title}>Tasks</h2>
         <div className={styles.taskList}>
           {todoList.length > 0 ? (
-            <ul className={styles.todoList}>
-              {todoList.map((todo, index) => (
-                <li key={index} className={styles.todoItem}>
-                  {display !== "none" && index != selectedTodoIndex ? (
-                    <>
-                      <span className={styles.index}>Task-{index + 1}: </span>
-                      <span className={styles.updatetask} onClick={() => handleTodoClick(index)}>
-                        {" "}
-                        {todo.task}
-                      </span>
-                    </>
-                  ) : (
-                    <form name={`update_task-${todo.id}`} className={styles.updateForm}>
-                      <label htmlFor={`task-${todo.id}`} className={styles.label}>
-                        Task-{index + 1}:
-                      </label>
-                      <input
-                        id={`task-${todo.id}`}
-                        type="text"
-                        value={updatedTask.id === todo.id ? updatedTask.task : todo.task}
-                        onChange={(e) => {
-                          e.preventDefault();
-                          setUpdatedTask({
-                            ...updatedTask,
-                            task: e.target.value,
-                          });
-                        }}
-                        className={styles.inputField}
-                      />
-                      <button
-                        type="submit"
+            <div>
+              <ul className={styles.todoList}>
+                {todoList.map((todo, index) => (
+                  <li key={index} className={styles.todoItem}>
+                    {display !== "none" && index != selectedTodoIndex ? (
+                      <div className={styles.label}>
+                        <span className={styles.index}>Task-{index + 1}: </span>
+                        <span className={styles.updatetask} onClick={() => handleTodoClick(index)}>
+                          {" "}
+                          {todo.task}
+                        </span>
+                      </div>
+                    ) : (
+                      <form name={`update_task-${todo.id}`} className={styles.updateForm}>
+                        <label htmlFor={`task-${todo.id}`} className={styles.label}>
+                          Task-{index + 1}:
+                        </label>
+                        <div className={styles.inputContainer}>
+                          <input
+                            id={`task-${todo.id}`}
+                            type="text"
+                            value={updatedTask.id === todo.id ? updatedTask.task : todo.task}
+                            onChange={(e) => {
+                              e.preventDefault();
+                              setUpdatedTask({
+                                ...updatedTask,
+                                task: e.target.value,
+                              });
+                            }}
+                            className={styles.inputField}
+                          />
+                          <button
+                            type="submit"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              updateTask(todo.id, updatedTask.task);
+                              setDisplay("block");
+                              setSelectedTodoIndex(-1);
+                            }}
+                            className={styles.button}
+                          >
+                            Update
+                          </button>
+                        </div>
+                      </form>
+                    )}
+                    <div className={styles.actionIcons}>
+                      {!todo.is_complete ? (
+                        <span
+                          onClick={(e) => {
+                            e.preventDefault();
+                            DoneTask(todo.id);
+                          }}
+                          className={styles.actionIcon}
+                        >
+                          &#10003;
+                        </span>
+                      ) : null}
+                      <span
                         onClick={(e) => {
                           e.preventDefault();
-                          updateTask(todo.id, updatedTask.task);
-                          setDisplay("block");
-                          setSelectedTodoIndex(-1);
+                          deleteTask(todo.id);
                         }}
-                        className={styles.button}
+                        className={styles.actionIcon}
                       >
-                        Update
-                      </button>
-                    </form>
-                  )}
-                  <span
-                    onClick={(e) => {
-                      e.preventDefault();
-                      DoneTask(todo.id);
-                    }}
-                    className={styles.actionIcon}
-                  >
-                    &#10003;
-                  </span>
-                  {todo.is_complete && <span className={styles.actionIcon}>&#10003;</span>}
-                  <span
-                    onClick={(e) => {
-                      e.preventDefault();
-                      deleteTask(todo.id);
-                    }}
-                    className={styles.actionIcon}
-                  >
-                    &times;
-                  </span>{" "}
-                </li>
-              ))}
-              <form name="createTask" className={styles["form-page"]}>
-                <input
-                  type="text"
-                  name="task"
-                  value={newTask}
-                  onChange={(e) => setNewTask(e.target.value)}
-                  placeholder="create a new task"
-                  required
-                  className={styles.inputField}
-                />
-                <button
-                  type="submit"
-                  onClick={(e) => {
-                    createTask(e);
-                  }}
-                  className={styles.button}
-                >
-                  Create
+                        &times;
+                      </span>{" "}
+                    </div>
+                  </li>
+                ))}
+                <button onClick={() => setDisplayComplete(!displayComplete)}>
+                  Completed tasks
                 </button>
-              </form>
-              <span
-                className={styles.signout}
-                onClick={() => {
-                  setsignedOut(true);
-                }}
-              >
-                Signout
-              </span>
-            </ul>
+                <div style={{ display: displayComplete ? "block" : "none" }}>
+                  <Complete list={todoList} deletetask={deleteTask} />
+                </div>
+              </ul>
+            </div>
           ) : (
             <>
               <p>No todos found.</p>
@@ -266,7 +261,7 @@ export default function TodoList() {
                   name="task"
                   value={newTask}
                   onChange={(e) => setNewTask(e.target.value)}
-                  placeholder="create a new task"
+                  placeholder="Enter new task here..."
                   required
                   className={styles.inputField}
                 />
@@ -290,52 +285,40 @@ export default function TodoList() {
               </span>
             </>
           )}
-        </div>
-      </div>
-    </>
-  );
-}
-
-{
-  /* <p>After retrieving the data based on email and password</p>
-      <h2>Todos</h2>
-      {todoList.length > 0 ? (
-        todoList.map((todo, index) => (
-          <div key={index}>
-            {display === "block" && index === index ? (
-              <span
-                onClick={(e) => {
-                  e.preventDefault();
-                  setupdatedTask((prevUpdatedTask) => ({
-                    ...prevUpdatedTask,
-                    id: todo.id,
-                  }));
-                  setDisplay("none");
-                }}
-              >
-                Task-{index + 1}: {todo.task}
-              </span>
-            ) : (
-              <form name={`update_task - ${todo.id}`}>
-                <span>Task-{index + 1}:</span>
+          {todoList.length > 0 ? (
+            <>
+              <form name="createTask" className={styles["form-page"]}>
                 <input
                   type="text"
-                  value={updatedTask?.id === todo.id ? updatedTask.task : todo.task}
-                  onChange={(e) => {
-                    e.preventDefault();
-                    setupdatedTask(e.target.value);
-                  }}
+                  name="task"
+                  value={newTask}
+                  onChange={(e) => setNewTask(e.target.value)}
+                  placeholder="Enter new task here..."
+                  required
+                  className={styles.inputField}
                 />
                 <button
                   type="submit"
                   onClick={(e) => {
-                    e.preventDefault();
-                    updateTask(todo.id, updatedTask);
-                    setDisplay("block");
+                    createTask(e);
                   }}
+                  className={styles.button}
                 >
-                  Update
+                  Create
                 </button>
               </form>
-            )}{" "} */
+              <span
+                className={styles.signout}
+                onClick={() => {
+                  setsignedOut(true);
+                }}
+              >
+                Signout
+              </span>
+            </>
+          ) : null}
+        </div>
+      </div>
+    </>
+  );
 }
