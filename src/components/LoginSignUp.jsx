@@ -64,7 +64,7 @@ export default function LoginSingUp() {
 
   return (
     <div className={styles.home}>
-      <h1 className={styles.title}>ToDo</h1>
+      <h1 className={styles.title}>Todo</h1>
       <form className={styles["form-page"]} name="LoginSignup">
         <label>
           email:
@@ -73,7 +73,6 @@ export default function LoginSingUp() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="write your email"
             autoComplete="true"
             required
           />
@@ -85,7 +84,6 @@ export default function LoginSingUp() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="password"
             autoComplete="true"
             required
           />
