@@ -1,0 +1,116 @@
+:root {
+    --bg-color: #f9f9f9;
+    --border-color: #000;
+    --list-bg-color: #ffffff;
+    --font-color: #000;
+    --login-bg-color: #007bff;
+    --signup-bg-color: #28a745;
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
+}
+
+.tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    border: 4px double var(--border-color);
+    padding: 10px;
+}
+
+.taskList {
+    margin: 10px 0px;
+}
+
+.todoList {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding: 10px;
+    border: 4px double var(--border-color);
+    list-style: none;
+}
+
+.todoItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+.updatetask {
+    padding-left: 10px;
+}
+
+label {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+label:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+
+
+.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+
+.form-page {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.inputField {
+    width: 90%;
+    padding: 10px;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signout {
+    color: #007bff;
+    cursor: pointer;
+    align-self: flex-end;
+    padding: 5px 10px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto;
+}

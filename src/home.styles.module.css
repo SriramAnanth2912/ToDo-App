@@ -1,0 +1,103 @@
+:root {
+    --bg-color: #f9f9f9;
+    --border-color: #000;
+    --form-bg-color: #ffffff;
+    --font-color: #000;
+    --login-bg-color: #007bff;
+    --signup-bg-color: #28a745;
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    border: 4px double var(--border-color);
+    padding: 10px;
+}
+
+.form-page {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 20px;
+    background-color: var(--form-bg-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-page label {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: var(--font-color);
+}
+
+.form-page label:hover {
+    cursor: default;
+    background-color: var(--form-bg-color);
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.form-login,
+.form-signup {
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-login {
+    background-color: var(--login-bg-color);
+    padding: 10px 20px;
+}
+
+.form-signup {
+    align-self: flex-end;
+    background-color: var(--signup-bg-color);
+    padding: 5px 10px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+@media screen and (max-width: 600px) {
+    .home {
+        margin-top: 40px;
+    }
+
+    .tasks {
+        margin-top: 40px;
+    }
+}
