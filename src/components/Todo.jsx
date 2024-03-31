@@ -262,8 +262,9 @@ export default function TodoList() {
                   value={newTask}
                   onChange={(e) => setNewTask(e.target.value)}
                   placeholder="Enter new task here..."
-                  required
+                  minLength={4}
                   className={styles.inputField}
+                  required
                 />
                 <button
                   type="submit"
@@ -294,15 +295,16 @@ export default function TodoList() {
                   value={newTask}
                   onChange={(e) => setNewTask(e.target.value)}
                   placeholder="Enter new task here..."
-                  required
+                  minLength={4}
                   className={styles.inputField}
+                  required
                 />
                 <button
                   type="submit"
                   onClick={(e) => {
                     createTask(e);
                   }}
-                  className={styles.button}
+                  className={styles.createTaskButton}
                 >
                   Create
                 </button>
