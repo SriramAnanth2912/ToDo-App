@@ -8,7 +8,7 @@ function Complete({ list, deletetask }) {
 
   return (
     <div className={styles.completedTasks}>
-      <ul>
+      <ul className={styles.list}>
         {list.map((todo, index) =>
           todo.is_complete ? (
             <li key={index} className={styles.todoItem}>
